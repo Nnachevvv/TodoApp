@@ -1,40 +1,67 @@
+window.onload = function() {
+    class Projects {
+        constructor() {
+            this.branches = new Set();
+        }
+
+        addProject(branch) {
+            this.branches.add(branch);
+        }
 
 
-function Projects() {
-
-}
+    }
 
 
+    class Task {
+        constructor(_name, _comment, _addedData) {
+            this.name = _name;
+            this.comment = _comment;
+            this.addedData = _addedData;
+        }
+
+        showTask(){
+
+        }
+    }
+
+    class Branch {
+
+        constructor(_title) {
+            this.title = _title;
+            this.createDate = null;
+            this.setDate();
+            this.tasks = [];
+        }
+
+        setDate() {
+            let today = new Date();
+            this.createDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        }
+
+        addTask(task) {
+            this.tasks.push(task);
+        }
+
+        showTasks() {
+            document.getElementById("name").innerText = this.title;
+            for (let curr of this.tasks) {
+                curr.showTasks();
+            }
+        }
+
+        removeTask(task) {
+            this.tasks.delete(task);
+        }
 
 
-function Task(_name, _comment, _addedData) {
-    this.name = _name;
-    this.comment = _comment;
-    this.addedData = _addedData;
-}
+    }
 
+    let defaultBranch = new Branch("Default Branch");
+    defaultBranch.addTask("click here");
+    let projects = new Projects();
 
-function Branch(_title) {
-     this.title = _title;
-     this.createDate = null;
-     this.setDate();
-     this.tasks = new Set();
-}
-
-Branch.prototype.setDate = function()
-{
-    let today = new Date();
-    this.createDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    defaultBranch.showTasks();
 };
-
-Branch.prototype.addTask = function addTask(task)
-{
-    this.tasks.add(task);
-};
-Branch.prototype.removeTask = function removeTask (task) {
-    this.tasks.delete(task);
-};
-
 
 
 
