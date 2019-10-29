@@ -1,5 +1,4 @@
-window.onload = function() {
-    class Projects {
+class Projects {
         constructor() {
             this.branches = new Set();
         }
@@ -20,7 +19,13 @@ window.onload = function() {
         }
 
         showTask(){
-
+            let paragraph = document.createElement("p");
+            let node = document.createTextNode(this.name);
+            paragraph.appendChild(node);
+            document.getElementById("name").appendChild(paragraph);
+            let el = document.createElement("INPUT");
+            el.setAttribute("type" , "checkbox");
+            document.body.appendChild(el)
         }
     }
 
@@ -31,6 +36,8 @@ window.onload = function() {
             this.createDate = null;
             this.setDate();
             this.tasks = [];
+            let task = new Task("FirstTask","asdasd", " ");
+            this.tasks.push(task);
         }
 
         setDate() {
@@ -44,9 +51,7 @@ window.onload = function() {
 
         showTasks() {
             document.getElementById("name").innerText = this.title;
-            for (let curr of this.tasks) {
-                curr.showTasks();
-            }
+            this.tasks[0].showTask();
         }
 
         removeTask(task) {
@@ -57,11 +62,7 @@ window.onload = function() {
     }
 
     let defaultBranch = new Branch("Default Branch");
-    defaultBranch.addTask("click here");
     let projects = new Projects();
 
     defaultBranch.showTasks();
-};
-
-
 
