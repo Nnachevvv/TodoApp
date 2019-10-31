@@ -36,8 +36,6 @@ class Projects {
             this.createDate = null;
             this.setDate();
             this.tasks = [];
-            let task = new Task("FirstTask","asdasd", " ");
-            this.tasks.push(task);
         }
 
         setDate() {
@@ -60,9 +58,16 @@ class Projects {
 
 
     }
-
     let defaultBranch = new Branch("Default Branch");
     let projects = new Projects();
 
-    defaultBranch.showTasks();
+    function addTask() {
+
+        let  name = document.getElementById("title").value;
+        let comment = "null";
+
+        let task = new Task(name,comment, new Date());
+        defaultBranch.addTask(task);
+        defaultBranch.showTasks();
+    }
 
