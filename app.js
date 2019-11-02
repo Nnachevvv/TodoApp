@@ -1,11 +1,14 @@
 class Projects {
         constructor() {
-            this.branches = new Set();
+            this.branches = {};
         }
 
+
         addProject(branch) {
-            this.branches.add(branch);
+            this.branches.push(branch);
         }
+
+
 
 
     }
@@ -19,19 +22,24 @@ class Projects {
             this.count = count;
         }
 
+
         showTask(){
             let paragraph = document.createElement("p");
+            let parent = document.getElementById("projects");
             paragraph.innerText = this.name;
             paragraph.id = this.count + " text";
-            document.body.appendChild(paragraph);
+            paragraph.className = "textProject";
+            parent.appendChild(paragraph);
             let el = document.createElement("INPUT");
             el.setAttribute("type" , "checkbox");
+            el.className = "checkBoxProject";
             el.id = this.count;
             el.addEventListener("click",function (e) {
                 defaultBranch.removeTask(e.target.id)
             },false);
 
-            document.body.appendChild(el);
+            parent.appendChild(el);
+
         }
     }
 
@@ -49,16 +57,22 @@ class Projects {
             this.createDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         }
 
-        addTask(name , comment ) {
+        addTask(name , comment) {
             let task = new Task(name,comment, new Date(),this.tasks.length);
             this.tasks.push(task);
+            this.showLast();
 
+        }
 
+        showLast(){
+            this.tasks[this.tasks.length-1].showTask();
         }
 
         showTasks() {
             document.getElementById("name").innerText = this.title;
-            this.tasks[0].showTask();
+            for (let task of this.tasks) {
+                task.showTask();
+            }
         }
 
         removeTask(task) {
@@ -69,16 +83,15 @@ class Projects {
 
 
     }
-    let defaultBranch = new Branch("Default Branch");
     let projects = new Projects();
 
     function addTask(e) {
+        let defaultBranch = new Branch("Default Branch");
         e.preventDefault();
         let  name = document.getElementById("title").value;
         let comment = "null";
-
-
         defaultBranch.addTask(name,comment);
-        defaultBranch.showTasks();
+        projects.addProject(defaultBranch);
+
     }
 

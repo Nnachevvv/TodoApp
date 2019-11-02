@@ -1,0 +1,25 @@
+#projects{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+
+.textProject{
+    display: block;
+    margin: 5px 0;
+    width: 200px;
+    background-color: aqua;
+    word-wrap: break-word;
+    line-height: 30px;
+}
+.checkBoxProject
+{
+    margin-left: 400px;
+    display: block;
+    position: relative;
+    margin-top: -30px;  /* make this margin match whatever your line-height is */
+    line-height: 30px;
+}
+

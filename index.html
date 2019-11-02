@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>TodoApp</title>
-</head>
+    <link rel="stylesheet" href="style.css">
+ </head>
 <body>
 <div id = "container">
-    <form>
-        <label>text
-    <input type="text" id="title" value="">
-            <button type="submit" onclick="addTask(event)">Add</button>
-        </label>
-    </form>
+
+    <div id = "branches">
+
+
+    </div>
+    <div id = "projects">
     <p id = "name"> </p>
+        <form>
+            <label>text
+                <input type="text" id="title" value="">
+                <button type="submit" onclick="addTask(event)">Add</button>
+            </label>
+        </form>
+    </div>
+
+
 
 </div>
 <script src="app.js"></script>
