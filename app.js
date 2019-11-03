@@ -14,6 +14,10 @@ class Projects {
             this.branches.get(nameBranch).addTask(title,comment);
         }
 
+        removeTaskBranch(nameBranch,id)
+        {
+            this.branches.get(nameBranch).removeTask(id);
+        }
         showBranchesInfo()
         {
             for(let branch of this.branches.values())
@@ -28,7 +32,7 @@ class Projects {
         }
 
 
-    deleteTasksInHtml() {
+     deleteTasksInHtml() {
         const myNode = document.getElementById("projects");
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
@@ -51,15 +55,13 @@ class Projects {
             let paragraph = document.createElement("p");
             let parent = document.getElementById("projects");
             paragraph.innerText = this.name;
-            paragraph.id = this.count + " text";
-            paragraph.className = "textProject";
+            paragraph.id = this.name+"text";
             parent.appendChild(paragraph);
             let el = document.createElement("INPUT");
             el.setAttribute("type" , "checkbox");
-            el.className = "checkBoxProject";
-            el.id = this.count;
+            el.id = this.name;
             el.addEventListener("click",function (e) {
-                defaultBranch.removeTask(e.target.id)
+                projects.removeTaskBranch(currentBranchName,e.target.id);
             },false);
 
             parent.appendChild(el);
@@ -73,7 +75,7 @@ class Projects {
             this.title = _title;
             this.createDate = null;
             this.setDate();
-            this.tasks = [];
+            this.tasks = new Map();
         }
 
         setDate() {
@@ -83,14 +85,11 @@ class Projects {
 
         addTask(name , comment) {
             let task = new Task(name,comment, new Date(),this.tasks.length);
-            this.tasks.push(task);
-            this.showLast();
+            this.tasks.set(name,task);
+            this.tasks.get(name).showTask();
 
         }
 
-        showLast(){
-            this.tasks[this.tasks.length-1].showTask();
-        }
 
         showBranchInfo()
         {
@@ -109,14 +108,15 @@ class Projects {
 
         showTasks() {
             document.getElementById("name").innerText = this.title;
-            for (let task of this.tasks) {
+            for (let task of this.tasks.values()) {
                 task.showTask();
             }
         }
 
         removeTask(task) {
+
             document.getElementById(task).remove();
-            document.getElementById(task + " text").remove();
+            document.getElementById(task+"text").remove();
             this.tasks.delete(task);
         }
     }
@@ -140,7 +140,10 @@ class Projects {
         let  name = document.getElementById("title").value;
         let comment = "null";
         projects.addTaskToBranch(currentBranchName,name,comment);
+
     }
+    
+
 
 
     function changeBranch(name)
