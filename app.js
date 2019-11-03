@@ -1,17 +1,41 @@
 class Projects {
         constructor() {
-            this.branches = {};
+            this.branches = new Map();
         }
 
 
-        addProject(branch) {
-            this.branches.push(branch);
+        addProject(title,branch) {
+            this.branches.set(title,branch);
+        }
+
+        addTaskToBranch(nameBranch, title , comment)
+        {
+            //TODO errors
+            this.branches.get(nameBranch).addTask(title,comment);
+        }
+
+        showBranchesInfo()
+        {
+            for(let branch of this.branches.values())
+            {
+               console.log(branch.showBranchInfo());
+            }
+        }
+
+        showCurrentBranchTasks(name)
+        {
+            this.branches.get(name).showTasks();
         }
 
 
-
+    deleteTasksInHtml() {
+        const myNode = document.getElementById("projects");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
 
     }
+}
 
 
     class Task {
@@ -68,6 +92,21 @@ class Projects {
             this.tasks[this.tasks.length-1].showTask();
         }
 
+        showBranchInfo()
+        {
+            let paragraph = document.createElement("p");
+            let parent = document.getElementById("branches");
+            paragraph.id = this.title;
+            paragraph.innerText = this.title;
+            paragraph.addEventListener("click",function (e) {
+                changeBranch(e.target.id)
+            },false);
+
+            parent.appendChild(paragraph);
+
+
+        }
+
         showTasks() {
             document.getElementById("name").innerText = this.title;
             for (let task of this.tasks) {
@@ -80,18 +119,41 @@ class Projects {
             document.getElementById(task + " text").remove();
             this.tasks.delete(task);
         }
-
-
     }
+
+
+
+
+
     let projects = new Projects();
+     let defaultBranch = new Branch("Default Branch");
+    let currentBranchName = "Default Branch";
+    projects.addProject(currentBranchName,defaultBranch);
+    projects.addProject("pesho", new Branch("pesho"));
+
+    projects.showBranchesInfo();
+
 
     function addTask(e) {
-        let defaultBranch = new Branch("Default Branch");
+
         e.preventDefault();
         let  name = document.getElementById("title").value;
         let comment = "null";
-        defaultBranch.addTask(name,comment);
-        projects.addProject(defaultBranch);
+        projects.addTaskToBranch(currentBranchName,name,comment);
+    }
+
+
+    function changeBranch(name)
+    {
+        currentBranchName = name;
+        projects.deleteTasksInHtml();
+        projects.showCurrentBranchTasks(currentBranchName);
 
     }
+
+
+
+
+
+
 
