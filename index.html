@@ -9,19 +9,23 @@
 <div id = "container">
 
     <div id = "branches">
-
+        <label>
+            <input type="text" id="branch" value="">
+            <button type="submit" onclick="projects.addProject(event)">Add</button>
+        </label>
     </div>
 
-
-    <p id = "name"> </p>
+    <div id="container-projects">
+    <span id = "name">  </span>
         <form>
-            <label>text
+            <label>
                 <input type="text" id="title" value="">
-                <button type="submit" onclick="addTask(event)">Add</button>
+                <button type="submit" onclick="projects.addTaskToBranch(event)">Add</button>
             </label>
         </form>
     <div id = "projects">
     </div>
+</div>
 
 
 
