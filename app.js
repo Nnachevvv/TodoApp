@@ -44,7 +44,7 @@ class Projects {
 
 
      deleteTasksInHtml() {
-        const myNode = document.getElementById("projects");
+        const myNode = document.getElementById("appendProjects");
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
@@ -62,7 +62,7 @@ class Projects {
 
         showTask(){
             let paragraph = document.createElement("p");
-            let parent = document.getElementById("projects");
+            let parent = document.getElementById("appendProjects");
             paragraph.innerText = this.name;
             paragraph.id = this.addedData+"text";
             paragraph.className = "textProject";
@@ -107,7 +107,7 @@ class Projects {
         sendHTMLBranchInfo()
         {
             let paragraph = document.createElement("p");
-            let parent = document.getElementById("branches");
+            let parent = document.getElementById("appendBranches");
             paragraph.id = this.title;
             paragraph.innerText = this.title;
             paragraph.addEventListener("click",function (e) {
@@ -137,8 +137,44 @@ class Projects {
     let projects = new Projects();
      let defaultBranch = new Branch("Default Branch");
     let currentBranchName = "Default Branch";
+
     projects.addProject(currentBranchName,defaultBranch);
     projects.addProject("pesho", new Branch("pesho"));
+
+(function modalBox() {
+    // Get the modal
+    const modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+    const btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+    const closeAlso = document.getElementById("close-btn");
+    const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    };
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+    closeAlso.onclick = function() {
+        projects.addProject(event);
+        modal.style.display = "none";
+    };
+
+// When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}());
+
+
 
 
 

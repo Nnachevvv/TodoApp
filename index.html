@@ -6,16 +6,19 @@
     <link rel="stylesheet" href="style.css">
  </head>
 <body>
-<div id = "container">
+
 
     <div id = "branches">
+        <div id="appendBranches"></div>
         <label>
-            <input type="text" id="branch" value="">
-            <button type="submit" onclick="projects.addProject(event)">Add</button>
+
+            <button id="myBtn">Add project</button>
         </label>
     </div>
-
-    <div id="container-projects">
+    
+        <div id="container-projects">
+    <!--TODO better solution for append children-->
+        <div id="appendProjects"></div>
     <span id = "name">  </span>
         <form>
             <label>
@@ -23,13 +26,41 @@
                 <button type="submit" onclick="projects.addTaskToBranch(event)">Add</button>
             </label>
         </form>
-    <div id = "projects">
-    </div>
-</div>
+            <div id = "projects"></div></div>
+
+
+        <!-- Trigger/Open The Modal -->
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <header>
+                <p>Add project</p>
+                </header>
+                <section>
+                <p> Project name</p>
+                <label>
+                <input type="text" id="branch" value="">
+                <button type="submit" id = "close-btn" onclick="projects.addProject(event)">Add</button>
+                </label>
+                </section>
+                <footer>
+
+                </footer>
+
+            </div>
+
+        </div>
 
 
 
-</div>
+
+
+
+
 <script src="app.js"></script>
 </body>
 </html>
