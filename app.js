@@ -149,8 +149,8 @@ class Projects {
     const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-    const closeAlso = document.getElementById("close-btn");
-    const span = document.getElementsByClassName("close")[0];
+    const closeAccept = document.getElementsByClassName("close")[0];
+    const closeClose = document.getElementsByClassName("close")[1];
 
 // When the user clicks on the button, open the modal
     btn.onclick = function() {
@@ -158,10 +158,11 @@ class Projects {
     };
 
 // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    closeClose.onclick = function() {
         modal.style.display = "none";
     };
-    closeAlso.onclick = function() {
+
+    closeAccept.onclick = function() {
         projects.addProject(event);
         modal.style.display = "none";
     };

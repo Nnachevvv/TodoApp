@@ -1,64 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>TodoApp</title>
-    <link rel="stylesheet" href="style.css">
- </head>
+    <link href="style.css" rel="stylesheet">
+</head>
 <body>
 
-
-    <div id = "branches">
+<div class=container>
+    <div class="branches">
         <div id="appendBranches"></div>
         <label>
 
             <button id="myBtn">Add project</button>
         </label>
     </div>
-    
-        <div id="container-projects">
-    <!--TODO better solution for append children-->
+    <div id="container-projects">
+        <span id="name">  </span>
+
+        <!--TODO better solution for append children-->
         <div id="appendProjects"></div>
-    <span id = "name">  </span>
         <form>
-            <label>
-                <input type="text" id="title" value="">
-                <button type="submit" onclick="projects.addTaskToBranch(event)">Add</button>
+            <label >
+                <input id="title" type="text" value="">
+                <button onclick="projects.addTaskToBranch(event)" type="submit">Add</button>
             </label>
         </form>
-            <div id = "projects"></div></div>
+        <div id="projects"></div>
+    </div>
 
 
-        <!-- Trigger/Open The Modal -->
+    <!-- Trigger/Open The Modal -->
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <header>
-                <p>Add project</p>
-                </header>
-                <section>
-                <p> Project name</p>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <header>
+                <span >Add project</span>
+            </header>
+            <section>
+                <span> Project name</span>
+                <div class="clearfix"></div>
+
                 <label>
-                <input type="text" id="branch" value="">
-                <button type="submit" id = "close-btn" onclick="projects.addProject(event)">Add</button>
+                    <input id="branch" type="text" value="">
+
+                    <button class= "close" id="close-btn" type="submit" >Close</button>
+                    <button id="accept" class = "close" onclick="projects.addProject(event)" type="submit">Add</button>
+
                 </label>
-                </section>
-                <footer>
+                <div class="clearfix"></div>
+            </section>
+            <footer>
 
-                </footer>
-
-            </div>
+            </footer>
 
         </div>
-
-
-
-
-
+    </div>
+</div>
 
 
 <script src="app.js"></script>
